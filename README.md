@@ -1,1 +1,117 @@
-# Web
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Fake Terminal</title>
+  <style>
+    body {
+      background: #1e1e1e;
+      font-family: monospace;
+      margin: 0;
+      padding: 30px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+
+    .terminal-window {
+      background: #1e1e1e;
+      border-radius: 6px;
+      width: 600px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.6);
+      overflow: hidden;
+    }
+
+    .terminal-header {
+      background: #2b2b2b;
+      height: 30px;
+      display: flex;
+      align-items: center;
+      padding: 0 10px;
+    }
+
+    .terminal-header .button {
+      height: 12px;
+      width: 12px;
+      border-radius: 50%;
+      margin-right: 6px;
+    }
+
+    .close { background: #ff5f56; }
+    .minimize { background: #ffbd2e; }
+    .maximize { background: #27c93f; }
+
+    .terminal-body {
+      padding: 15px 20px;
+      color: #ccc;
+      line-height: 1.6;
+      font-size: 15px;
+    }
+
+    .green {
+      color: #00ff00;
+    }
+
+    .blue a {
+      color: #61dafb;
+      text-decoration: none;
+    }
+
+    .blue a:hover {
+      text-decoration: underline;
+    }
+
+    .line::before {
+      content: "$ ";
+      color: #00ff00;
+    }
+
+    .dim {
+      color: #555;
+    }
+
+    .no-prefix::before {
+      content: "";
+    }
+  </style>
+</head>
+<body>
+  <div class="terminal-window">
+    <div class="terminal-header">
+      <div class="button close"></div>
+      <div class="button minimize"></div>
+      <div class="button maximize"></div>
+    </div>
+    <div class="terminal-body" id="terminal">
+      <!-- Content will be added by JS -->
+    </div>
+  </div>
+
+  <script>
+    const terminal = document.getElementById('terminal');
+
+    function printLine(text, className = "") {
+      const div = document.createElement("div");
+      div.className = className;
+      div.innerHTML = text;
+      terminal.appendChild(div);
+    }
+
+    printLine("# run this command:", "no-prefix");
+    printLine('<span class="green">Contact us</span> <a href="mailto:ikyhdytlh@gmail.com">ikyhdytlh@gmail.com</a>', "line");
+    printLine('<span class="green">Link Social Media:</span>', "line");
+
+    const links = [
+      'https://instagram.com/ikyhdytlh_',
+      'https://wa.me/qr/7WLT5XJJKNAKG1'
+    ];
+
+    links.forEach(link => {
+      printLine(`<a href="${link}" target="_blank">${link}</a>`, "line blue");
+    });
+
+    printLine('$ what next?', 'dim no-prefix');
+  </script>
+</body>
+</html>
